@@ -2,8 +2,15 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
 export const environment = {
-  production: false
+  production: false,
+  
+  // 1. Krademo apiKey za Authentication (Login/Register)
+  firebaseApiKey: "AIzaSyDiVhZ8q4yqLKXwH7NiWsAsrrAcw4ENST0",
+  
+  // 2. Krademo databaseURL za Realtime Database (Rezervacije)
+  databaseUrl: "https://wedding-app-98beb-default-rtdb.europe-west1.firebasedatabase.app"
 };
 
 /*
