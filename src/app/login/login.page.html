@@ -1,30 +1,32 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Prijava na sistem</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="login-content">
 
-<ion-content class="ion-padding">
-  <div class="login-container">
-    <h2>Dobrodošli</h2>
-    <p>Unesite podatke za pristup organizaciji svadbi</p>
+  <div class="login-wrapper">
 
-    <ion-item lines="full">
-      <ion-label position="floating">Email adresa</ion-label>
-      <ion-input type="email" [(ngModel)]="email"></ion-input>
-    </ion-item>
+    <div class="login-card">
 
-    <ion-item lines="full">
-      <ion-label position="floating">Lozinka</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
+      <h1 class="title"><ion-icon name="heart"></ion-icon>Dobrodošli<ion-icon name="heart"></ion-icon></h1>
+      <p class="subtitle">Prijavi se da nastaviš</p>
 
-    <ion-button expand="block" (click)="prijaviSe()" class="ion-margin-top">
-      Prijavi se
-    </ion-button>
+      <ion-item lines="none" class="input-item">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
 
-    <ion-button expand="block" fill="clear" (click)="registrujSe()">
-      Nemaš nalog? Registruj se
-    </ion-button>
+      <ion-item lines="none" class="input-item">
+        <ion-label position="floating">Lozinka</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" class="login-btn" (click)="prijaviSe()">
+        Prijavi se
+      </ion-button>
+
+      <ion-button expand="block" fill="clear" class="register-btn" (click)="registrujSe()">
+        Nemaš nalog? Registruj se
+      </ion-button>
+
+    </div>
+
   </div>
+
 </ion-content>
