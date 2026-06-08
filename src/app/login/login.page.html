@@ -1,13 +1,30 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Prijava na sistem</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <h2>Dobrodošli</h2>
+    <p>Unesite podatke za pristup organizaciji svadbi</p>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Email adresa</ion-label>
+      <ion-input type="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Lozinka</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="prijaviSe()" class="ion-margin-top">
+      Prijavi se
+    </ion-button>
+
+    <ion-button expand="block" fill="clear" (click)="registrujSe()">
+      Nemaš nalog? Registruj se
+    </ion-button>
+  </div>
 </ion-content>
