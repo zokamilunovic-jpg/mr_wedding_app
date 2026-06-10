@@ -1,0 +1,60 @@
+<ion-content class="login-content">
+
+  <div class="login-wrapper">
+
+    <div class="login-card">
+
+      <h1 class="title">
+        <ion-icon name="heart"></ion-icon>
+        Registracija
+        <ion-icon name="heart"></ion-icon>
+      </h1>
+
+      <p class="subtitle">Kreiraj svoj nalog</p>
+
+      <ion-item lines="none" class="input-item">
+        <ion-label position="floating">Ime</ion-label>
+        <ion-input [(ngModel)]="ime"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item">
+        <ion-label position="floating">Prezime</ion-label>
+        <ion-input [(ngModel)]="prezime"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input
+          type="email"
+          [(ngModel)]="email">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item">
+        <ion-label position="floating">Lozinka</ion-label>
+        <ion-input
+          type="password"
+          [(ngModel)]="password">
+        </ion-input>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        class="login-btn"
+        (click)="registrujSe()">
+        Registruj se
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        fill="clear"
+        class="register-btn"
+        routerLink="/login">
+        Već imaš nalog? Prijavi se
+      </ion-button>
+
+    </div>
+
+  </div>
+
+</ion-content>
