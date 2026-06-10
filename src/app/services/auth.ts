@@ -38,6 +38,8 @@ export class AuthService {
   );
 }
 
+
+
   /**
    * 2. LOGIN POSTOJEĆEG KORISNIKA
    */
@@ -60,6 +62,12 @@ export class AuthService {
       })
     );
   }
+
+  getUser(uid: string) {
+  return this.http.get(
+    `${environment.databaseUrl}/users/${uid}.json`
+  );
+}  
 
   /**
    * 3. ODJAVA KORISNIKA (LOGOUT)

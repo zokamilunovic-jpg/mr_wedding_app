@@ -18,22 +18,45 @@ export class LoginPage {
   ) {}
 
   prijaviSe() {
-    if (this.email && this.password) {
-      this.authService.login(this.email, this.password).subscribe({
-        next: (odgovor) => {
-          console.log('Uspešan login:', odgovor);
-          alert('Dobrodošli!');
-          this.router.navigate(['/home']);
-        },
-        error: (greška) => {
-          console.error('Greška pri loginu:', greška);
-          alert('Neuspešna prijava. Proverite podatke.');
-        }
-      });
-    } else {
-      alert('Molimo popunite oba polja.');
-    }
+  if (this.email && this.password) {
+    this.authService.login(this.email, this.password).subscribe({
+      next: (odgovor) => {
+        console.log('Uspešan login:', odgovor);
+
+        const uid = odgovor.localId;
+
+        this.authService.getUser(uid).subscribe({
+          next: (user: any) => {
+            console.log('USER:', user);
+
+            // čuvanje user-a
+            localStorage.setItem('user', JSON.stringify(user));
+
+            alert('Dobrodošli!');
+
+            // ROLE LOGIKA
+            if (user.role === 'admin') {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/home']);
+            }
+          },
+          error: (err) => {
+            console.error('Greška pri učitavanju user-a:', err);
+            alert('Ne mogu da učitam podatke korisnika.');
+          }
+        });
+
+      },
+      error: (greška) => {
+        console.error('Greška pri loginu:', greška);
+        alert('Neuspešna prijava. Proverite podatke.');
+      }
+    });
+  } else {
+    alert('Molimo popunite oba polja.');
   }
+}
 
   registrujSe() {
     if (this.email && this.password) {
