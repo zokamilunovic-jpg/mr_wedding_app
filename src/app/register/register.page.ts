@@ -32,7 +32,8 @@ export class RegisterPage {
         const korisnik = {
           ime: this.ime,
           prezime: this.prezime,
-          email: this.email
+          email: this.email,
+          role:'client'
         };
 
         this.authService
