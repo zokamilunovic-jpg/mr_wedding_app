@@ -21,25 +21,39 @@ export class RegisterPage {
 
   registrujSe() {
 
-    if (!this.email || !this.password) {
-      alert('Popunite sva polja.');
-      return;
-    }
+  this.authService
+    .registracija(this.email, this.password)
+    .subscribe({
 
-    this.authService.registracija(
-      this.email,
-      this.password
-    ).subscribe({
+      next: (res) => {
 
-      next: () => {
-        alert('Uspešna registracija!');
-        this.router.navigate(['/login']);
+        const uid = res.localId;
+
+        const korisnik = {
+          ime: this.ime,
+          prezime: this.prezime,
+          email: this.email
+        };
+
+        this.authService
+          .sacuvajKorisnika(uid, korisnik)
+          .subscribe({
+
+            next: () => {
+              alert('Uspešna registracija!');
+              this.router.navigate(['/login']);
+            },
+
+            error: (err) => {
+              console.log(err);
+            }
+          });
       },
-
-      error: (err) => {
-        console.log(err);
-        alert('Greška prilikom registracije.');
-      }
+error: (err) => {
+  console.log(err);
+  alert('Greška pri registraciji');
+}
     });
-  }
+}
+
 }

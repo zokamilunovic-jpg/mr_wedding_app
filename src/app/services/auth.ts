@@ -30,6 +30,14 @@ export class AuthService {
     return this.http.post(url, teloZahteva);
   }
 
+  //cuvanje korisnika u bazi
+  sacuvajKorisnika(uid: string, korisnik: any) {
+  return this.http.put(
+    `${environment.databaseUrl}/users/${uid}.json`,
+    korisnik
+  );
+}
+
   /**
    * 2. LOGIN POSTOJEĆEG KORISNIKA
    */
