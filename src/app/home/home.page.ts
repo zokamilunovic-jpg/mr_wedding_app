@@ -1,54 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../services/reservation';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-   styleUrls: ['./home.page.scss'],
+  styleUrls: ['./home.page.scss'],
   standalone:false,
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  reservationDate = '';
-  guestsCount =0;
-  constructor(
-    private reservationService: ReservationService
-  ) {}
+  reservations: any[] = [];
 
-  sendReservation() {
+  constructor(private reservationService: ReservationService) {}
 
-    const reservation = {
+  ngOnInit() {
+    this.loadReservations();
+  }
 
-      userId: localStorage.getItem('uid'),
+  loadReservations() {
 
-      date: this.reservationDate,
+    this.reservationService.getReservations()
+      .subscribe((data: any) => {
 
-      guestsCount: this.guestsCount,
+        const uid = localStorage.getItem('uid');
 
-      status: 'pending'
+        const result: any[] = [];
 
-    };
+        for (let key in data) {
 
-    this.reservationService
-      .createReservation(reservation)
-      .subscribe({
+          if (data[key].userId === uid) {
 
-        next: () => {
+            result.push({
+              id: key,
+              ...data[key]
+            });
 
-          alert('Rezervacija poslata');
-
-          this.reservationDate = '';
-          this.guestsCount=0;
-
-        },
-
-        error: (err) => {
-
-          console.log(err);
-
-          alert('Greška');
+          }
 
         }
+
+        this.reservations = result;
 
       });
 

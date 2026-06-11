@@ -1,0 +1,56 @@
+<ion-content class="reservation-content">
+
+  <div class="reservation-wrapper">
+
+    <div class="reservation-card">
+
+      <h1 class="title">
+        <ion-icon name="heart"></ion-icon>
+        Rezervacija termina
+        <ion-icon name="heart"></ion-icon>
+      </h1>
+
+      <p class="subtitle">
+        Izaberi datum i pošalji zahtev
+      </p>
+
+     
+      <ion-item lines="none" class="input-item">
+        <ion-label position="floating">
+          Datum svadbe
+        </ion-label>
+
+        <ion-input
+          type="date"
+          [(ngModel)]="reservationDate">
+        </ion-input>
+      </ion-item>
+
+    <ion-item lines="none" class="input-item">
+
+  <ion-label position="floating">
+    Broj gostiju
+  </ion-label>
+
+  <ion-input
+    type="number"
+    [(ngModel)]="guestsCount">
+  </ion-input>
+
+</ion-item>
+
+
+      <ion-button
+        expand="block"
+        class="login-btn"
+        (click)="sendReservation()">
+
+        Pošalji rezervaciju
+
+      </ion-button>
+
+    </div>
+
+  </div>
+
+</ion-content>
