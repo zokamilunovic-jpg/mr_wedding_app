@@ -8,7 +8,7 @@ export class ReservationService {
 
   // ⚠️ OVO ZAMENI SA SVOJIM FIREBASE URL-OM
   private dbUrl =
-    'https://identitytoolkit.googleapis.com/v1/accounts:';
+    'https://wedding-app-98beb-default-rtdb.europe-west1.firebasedatabase.app/';
 
   constructor(private http: HttpClient) {}
 
