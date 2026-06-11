@@ -51,3 +51,32 @@
   font-weight: bold;
   margin-top: 10px;
 }
+
+ion-footer ion-toolbar {
+  --background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 105, 180, 0.15);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: var(--ion-color-medium);
+  letter-spacing: 0.3px;
+}
+
+.social ion-icon {
+  font-size: 18px;
+  margin-left: 10px;
+  color: var(--ion-color-medium);
+  transition: 0.2s ease;
+}
+
+.social ion-icon:hover {
+  transform: translateY(-2px);
+  color: #ff69b4;
+  filter: drop-shadow(0 2px 6px rgba(255, 105, 180, 0.4));
+}
