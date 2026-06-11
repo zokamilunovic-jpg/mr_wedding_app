@@ -1,29 +1,29 @@
-<ion-content class="home-content">
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
 
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home-content" fullscreen>
   <div class="home-wrapper">
-
     <div class="home-card">
 
       <h1 class="title">Moje rezervacije</h1>
 
       <p class="subtitle">Pregled svih tvojih termina</p>
 
-      <ion-list>
-
+      <ion-list lines="none">
         <ion-item *ngFor="let r of reservations">
-
           <ion-label>
-
             <h2>{{ r.date }}</h2>
-
             <p>Broj gostiju: {{ r.guestsCount }}</p>
-
             <p>Status: {{ r.status }}</p>
-
           </ion-label>
-
         </ion-item>
-
       </ion-list>
 
       <ion-button
@@ -36,28 +36,25 @@
       </ion-button>
 
     </div>
-
   </div>
-
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <div class="footer-content">
-
       <div class="copyright">
         © 2026 Wedding-app
       </div>
 
       <div class="social">
-       <a href="https://www.youtube.com/watch?v=450p7goxZqg" target="_blank">
-  <ion-icon name="globe-outline"></ion-icon>
-</a>
-     <a href="https://www.instagram.com/" target="_blank">
-  <ion-icon name="logo-instagram"></ion-icon>
-</a>
-      </div>
+        <a href="https://www.youtube.com/watch?v=450p7goxZqg" target="_blank">
+          <ion-icon name="globe-outline"></ion-icon>
+        </a>
 
+        <a href="https://www.instagram.com/" target="_blank">
+          <ion-icon name="logo-instagram"></ion-icon>
+        </a>
+      </div>
     </div>
   </ion-toolbar>
 </ion-footer>

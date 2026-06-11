@@ -99,3 +99,17 @@
   font-weight: bold;
   margin-top: 10px;
 }
+
+ion-header ion-toolbar {
+  --background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+}
+
+ion-title {
+  color: #d63384;
+  font-weight: bold;
+}
+
+ion-menu-button {
+  color: #d63384;
+}
