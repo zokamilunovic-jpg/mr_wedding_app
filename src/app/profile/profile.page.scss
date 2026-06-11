@@ -1,0 +1,61 @@
+.profile-content {
+  --background: linear-gradient(135deg, #ffd6e7, #fff0f6);
+}
+
+.profile-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+}
+
+.avatar ion-icon {
+  font-size: 80px;
+  color: #d63384;
+  margin-bottom: 10px;
+}
+
+.profile-card h2 {
+  color: #d63384;
+  margin: 10px 0 5px;
+}
+
+.profile-card p {
+  color: #8a8a8a;
+  margin-bottom: 20px;
+}
+
+.logout-btn {
+  --background: rgba(255, 255, 255, 0.85);
+  --color: #d63384;
+  --border-radius: 14px;
+  font-weight: 600;
+
+  --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+
+  transition: all 0.25s ease;
+  margin-top: 20px;
+}
+
+.logout-btn:hover {
+  --background: #ffffff;
+  transform: translateY(-2px);
+  --box-shadow: 0 12px 30px rgba(214, 51, 132, 0.15);
+}
+
+.logout-btn:active {
+  transform: scale(0.98);
+}
