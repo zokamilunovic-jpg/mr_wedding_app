@@ -10,7 +10,7 @@ import { ReservationService } from '../services/reservation';
 export class HomePage {
 
   reservationDate = '';
-
+  guestsCount =0;
   constructor(
     private reservationService: ReservationService
   ) {}
@@ -22,6 +22,8 @@ export class HomePage {
       userId: localStorage.getItem('uid'),
 
       date: this.reservationDate,
+
+      guestsCount: this.guestsCount,
 
       status: 'pending'
 
@@ -36,6 +38,7 @@ export class HomePage {
           alert('Rezervacija poslata');
 
           this.reservationDate = '';
+          this.guestsCount=0;
 
         },
 

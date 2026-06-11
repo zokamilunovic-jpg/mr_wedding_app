@@ -26,7 +26,20 @@
         </ion-input>
       </ion-item>
 
-    
+    <ion-item lines="none" class="input-item">
+
+  <ion-label position="floating">
+    Broj gostiju
+  </ion-label>
+
+  <ion-input
+    type="number"
+    [(ngModel)]="guestsCount">
+  </ion-input>
+
+</ion-item>
+
+
       <ion-button
         expand="block"
         class="login-btn"
