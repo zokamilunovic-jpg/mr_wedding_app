@@ -3,7 +3,6 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-
     <ion-title>Reservation</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -23,13 +22,6 @@
       <p class="subtitle">
         Izaberi datum i pošalji zahtev
       </p>
-
-      <div class="status-container" *ngIf="currentStatus">
-        <span class="status-label">Status:</span>
-        <span class="status-badge" [ngClass]="currentStatus">
-          {{ currentStatus === 'pending' ? 'Na čekanju' : currentStatus === 'approved' ? 'Odobreno' : 'Odbijeno' }}
-        </span>
-      </div>
 
       <ion-item lines="none" class="input-item">
         <ion-label position="floating">
