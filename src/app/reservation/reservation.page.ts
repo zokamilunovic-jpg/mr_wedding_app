@@ -79,36 +79,38 @@ loadServices() {
     }
   });
 }
-
-  sendReservation() {
-    
-    const userId = localStorage.getItem('userId');
-    if (!userId) {
-      alert('Korisnik nije ulogovan.');
-      return;
-    }
-
-    const reservation = {
-      userId: userId,
-      date: this.reservationDate,
-      guestsCount: this.guestsCount,
-      serviceIds: this.selectedServiceIds,
-      status: 'pending'
-    };
-
-    this.reservationService
-      .createReservation(reservation, userId)
-      .subscribe({
-        next: () => {
-          alert('Rezervacija uspešno poslata');
-          this.reservationDate = '';
-          this.guestsCount = 0;
-          this.checkCurrentReservation(); // Osvežavamo ekran
-        },
-        error: (err) => {
-          console.error('Greška pri slanju:', err);
-          alert('Greška prilikom kreiranja rezervacije.');
-        }
-      });
+sendReservation() {
+  const userId = localStorage.getItem('userId');
+  if (!userId) {
+    alert('Korisnik nije ulogovan.');
+    return;
   }
+
+  const reservation = {
+    userId: userId,
+    date: this.reservationDate,
+    guestsCount: this.guestsCount,
+    serviceIds: this.selectedServiceIds,
+    status: 'pending'
+  };
+
+  this.reservationService
+    .createReservation(reservation, userId)
+    .subscribe({
+      next: () => {
+        alert('Rezervacija uspešno poslata');
+        
+       
+        this.reservationDate = '';          
+        this.guestsCount = 0;             
+        this.selectedServiceIds = [];      
+        
+        this.checkCurrentReservation();   
+      },
+      error: (err) => {
+        console.error('Greška pri slanju:', err);
+        alert('Greška prilikom kreiranja rezervacije.');
+      }
+    });
+}
 }
