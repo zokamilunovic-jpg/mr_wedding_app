@@ -1,13 +1,81 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>admin</ion-title>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Admin Panel - Zahtevi</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding" style="--background: #f9f9f9;">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">admin</ion-title>
+      <ion-title size="large">Admin Panel</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div style="margin-bottom: 20px; text-align: center; margin-top: 10px;">
+    <h2 style="font-weight: bold; color: #333; margin-bottom: 4px;">Upravljanje rezervacijama</h2>
+    <p style="color: #666; font-size: 14px; margin: 0;">Pregled i obrada svih pristiglih zahteva za venčanja</p>
+  </div>
+
+  <div *ngIf="allRequests.length === 0" style="text-align: center; padding: 40px; color: #999;">
+    <ion-icon name="folder-open-outline" style="font-size: 64px; color: #ccc;"></ion-icon>
+    <p>Trenutno nema pristiglih zahteva za rezervaciju.</p>
+  </div>
+
+  <ion-card *ngFor="let req of allRequests" style="margin-bottom: 16px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-inline: 0px;">
+    <ion-card-header style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding: 12px 16px;">
+      <div>
+        <ion-card-title style="font-size: 18px; font-weight: bold; color: #222;">
+          Datum: {{ req.date }}
+        </ion-card-title>
+      </div>
+      
+      <ion-badge [color]="req.status === 'pending' ? 'warning' : (req.status === 'approved' ? 'success' : 'danger')">
+        {{ req.status === 'pending' ? 'NA ČEKANJU' : (req.status === 'approved' ? 'ODOBRENO' : 'ODBIJENO') }}
+      </ion-badge>
+    </ion-card-header>
+
+    <ion-card-content style="padding: 16px;">
+      <p style="font-size: 15px; margin: 6px 0; color: #444; display: flex; align-items: center;">
+        <ion-icon name="people-outline" style="font-size: 18px; margin-right: 8px; color: #555;"></ion-icon>
+        Broj gostiju: &nbsp;<strong>{{ req.guestsCount }}</strong>
+      </p>
+      
+      <p style="font-size: 15px; margin: 6px 0; color: #444; display: flex; align-items: center;">
+        <ion-icon name="cash-outline" style="font-size: 18px; margin-right: 8px; color: #555;"></ion-icon>
+        Ukupna cena: &nbsp;<strong style="color: #e91e63; font-size: 16px;">{{ req.price || 0 }} EUR</strong>
+      </p>
+
+      <div *ngIf="req.services && req.services.length > 0" style="margin-top: 12px; border-top: 1px dashed #e0e0e0; padding-top: 8px;">
+        <span style="font-size: 13px; color: #777;">Odabrane dodatne usluge:</span>
+        <div style="margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px;">
+          <ion-chip color="secondary" outline="true" *ngFor="let service of req.services" style="height: 26px; margin: 0;">
+            <ion-label style="font-size: 12px; font-weight: 500;">{{ service }}</ion-label>
+          </ion-chip>
+        </div>
+      </div>
+
+      <div *ngIf="req.status === 'pending'" style="display: flex; gap: 10px; margin-top: 16px;">
+        <ion-button 
+          expand="block" 
+          color="success" 
+          style="flex: 1; font-weight: bold; margin: 0; --border-radius: 8px;"
+          (click)="updateStatus(req.id, req.userId, 'approved')">
+          <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+          Prihvati
+        </ion-button>
+        
+        <ion-button 
+          expand="block" 
+          color="danger" 
+          style="flex: 1; font-weight: bold; margin: 0; --border-radius: 8px;"
+          (click)="updateStatus(req.id, req.userId, 'rejected')">
+          <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+          Odbij
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

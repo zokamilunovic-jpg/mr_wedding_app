@@ -47,4 +47,10 @@ export class ReservationService {
     `${this.dbUrl}/services.json`
   );
 }
+
+
+// Povlači celo stablo rezervacija (za sve korisnike)
+getAllReservations() {
+  return this.http.get(`${this.dbUrl}/reservations.json`);
+}
 }
