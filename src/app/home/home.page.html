@@ -15,18 +15,25 @@
       <p class="subtitle">Pregled svih tvojih termina</p>
 
       <ion-list lines="full" *ngIf="reservations && reservations.length > 0">
-        <ion-item *ngFor="let r of reservations">
+        <ion-item *ngFor="let r of reservations" style="--background: #fff5f7; margin-bottom: 8px; --border-radius: 10px;">
           <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+          
           <ion-label>
-            <h2>{{ r.date }}</h2>
+            <h2 style="color: #c71585; font-weight: bold;">{{ r.date }}</h2>
             <p>Broj gostiju: <strong>{{ r.guestsCount }}</strong></p>
             <p>Ukupna cena: <strong style="color: #e91e63;">{{ r.price || 0 }} EUR</strong></p>
           </ion-label>
           
           <ion-badge slot="end" 
-                     [color]="r.status === 'pending' ? 'warning' : (r.status === 'approved' ? 'success' : 'danger')">
+                     [color]="r.status === 'pending' ? 'warning' : (r.status === 'approved' ? 'success' : 'danger')"
+                     style="margin-right: 10px;">
             {{ r.status === 'pending' ? 'NA ČEKANJU' : (r.status === 'approved' ? 'ODOBRENO' : 'ODBIJENO') }}
           </ion-badge>
+
+          <ion-button slot="end" fill="clear" (click)="openUpdateModal(r)" style="--color: #ff69b4;">
+            <ion-icon name="create-outline" slot="icon-only" style="font-size: 24px;"></ion-icon>
+          </ion-button>
+
         </ion-item>
       </ion-list>
 
