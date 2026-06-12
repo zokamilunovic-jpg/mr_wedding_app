@@ -113,3 +113,41 @@ ion-title {
 ion-menu-button {
   color: #d63384;
 }
+
+ion-item {
+  --background: #fff0f5;       
+  --border-color: #ff69b4;     
+  margin-bottom: 15px;         
+  --ripple-color: #ffb6c1;     
+}
+
+ion-label {
+  color: #c71585 !important;   
+  font-weight: 600;           
+}
+
+
+ion-select {
+  --placeholder-color: #ffb6c1; 
+  color: #d81b60;              
+  font-weight: 500;
+  
+
+  &::part(icon) {
+    color: #ff69b4;             
+    opacity: 1;
+  }
+}
+
+.select-interface-option {
+  --background: #ffffff;
+  --color: #d81b60;
+  
+  &[aria-checked="true"] {
+    --color: #ff69b4;         
+    ion-checkbox {
+      --checkbox-background: #ff69b4; 
+      --border-color: #ff69b4;
+    }
+  }
+}

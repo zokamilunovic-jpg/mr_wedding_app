@@ -41,4 +41,10 @@ export class ReservationService {
       data
     );
   }
+
+  getServices(): Observable<any> {
+  return this.http.get(
+    `${this.dbUrl}/services.json`
+  );
+}
 }

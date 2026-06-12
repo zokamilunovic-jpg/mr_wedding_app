@@ -13,19 +13,22 @@ export class ReservationPage {
   reservationDate = '';
   guestsCount = 0;
   currentStatus = ''; // 'pending', 'approved', 'rejected'
-  
-  userReservations: any[] = []; 
+  services: any = [];
+  selectedServiceIds: string[] = [];
+  servicesTotal = 0;
+  userReservations: any[] = [];
 
   constructor(
     private reservationService: ReservationService
-  ) {}
+  ) { }
 
   ionViewWillEnter() {
     this.checkCurrentReservation();
+    this.loadServices();
   }
 
   checkCurrentReservation() {
-    // Promenjeno na 'userId'
+    
     const userId = localStorage.getItem('userId');
     if (!userId) return;
 
@@ -58,8 +61,27 @@ export class ReservationPage {
       });
   }
 
+loadServices() {
+  this.reservationService.getServices().subscribe((res: any) => {
+    this.services = [];
+    if (res) {
+      Object.keys(res).forEach((id) => {
+        
+        if (res[id]) { 
+          this.services.push({
+            id: id,                                    
+            name: res[id].name || 'Bez naziva', 
+            price: res[id].price || 0 
+          });
+        }
+      });
+      console.log('Učitane usluge:', this.services); 
+    }
+  });
+}
+
   sendReservation() {
-    // Promenjeno na 'userId'
+    
     const userId = localStorage.getItem('userId');
     if (!userId) {
       alert('Korisnik nije ulogovan.');
@@ -70,6 +92,7 @@ export class ReservationPage {
       userId: userId,
       date: this.reservationDate,
       guestsCount: this.guestsCount,
+      serviceIds: this.selectedServiceIds,
       status: 'pending'
     };
 

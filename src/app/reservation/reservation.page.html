@@ -43,6 +43,15 @@
         </ion-input>
       </ion-item>
 
+      <ion-item>
+  <ion-label position="floating">Izaberite usluge</ion-label>
+ <ion-select [(ngModel)]="selectedServiceIds" multiple="true" okText="Potvrdi" cancelText="Otkaži" interface="alert" class="roze-select">
+    <ion-select-option *ngFor="let service of services" [value]="service.id">
+      {{ service.name }} ({{ service.price }} EUR)
+    </ion-select-option>
+  </ion-select>
+</ion-item>
+
       <ion-button
         expand="block"
         class="login-btn"
