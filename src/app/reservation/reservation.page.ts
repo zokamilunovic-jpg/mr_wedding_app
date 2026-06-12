@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ReservationService } from '../services/reservation';
-import { map } from 'rxjs/operators'; // <-- Važan import za Firebase podatke
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-reservation',
@@ -12,25 +12,26 @@ export class ReservationPage {
 
   reservationDate = '';
   guestsCount = 0;
-  currentStatus = ''; // Ovde čuvamo status: 'pending', 'approved', 'rejected'
+  currentStatus = ''; // 'pending', 'approved', 'rejected'
+  
+  userReservations: any[] = []; 
 
   constructor(
     private reservationService: ReservationService
   ) {}
 
-  // Pokreće se svaki put kada korisnik uđe na ekran
   ionViewWillEnter() {
     this.checkCurrentReservation();
   }
 
   checkCurrentReservation() {
-    const uid = localStorage.getItem('uid');
-    if (!uid) return;
+    // Promenjeno na 'userId'
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
 
-    this.reservationService.getReservations()
+    this.reservationService.getReservations(userId)
       .pipe(
         map((response: any) => {
-          // Transformišemo Firebase objekat objekata u niz koji možemo da filtriramo
           const reservationsArray = [];
           for (const key in response) {
             if (response.hasOwnProperty(key)) {
@@ -42,13 +43,13 @@ export class ReservationPage {
       )
       .subscribe({
         next: (reservations: any[]) => {
-          // Pronalazimo rezervaciju koja pripada trenutno ulogovanom korisniku
-          const userReservation = reservations.find(res => res.userId === uid);
-          
-          if (userReservation) {
-            this.currentStatus = userReservation.status;
+          this.userReservations = reservations;
+
+          if (reservations.length > 0) {
+            const lastReservation = reservations[reservations.length - 1];
+            this.currentStatus = lastReservation.status;
           } else {
-            this.currentStatus = ''; // Ako nema rezervacije za ovog korisnika
+            this.currentStatus = '';
           }
         },
         error: (err) => {
@@ -58,31 +59,32 @@ export class ReservationPage {
   }
 
   sendReservation() {
-    const uid = localStorage.getItem('uid');
-    if (!uid) {
+    // Promenjeno na 'userId'
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
       alert('Korisnik nije ulogovan.');
       return;
     }
 
     const reservation = {
-      userId: uid,
+      userId: userId,
       date: this.reservationDate,
       guestsCount: this.guestsCount,
-      status: 'pending' // Početni status
+      status: 'pending'
     };
 
     this.reservationService
-      .createReservation(reservation)
+      .createReservation(reservation, userId)
       .subscribe({
         next: () => {
-          alert('Rezervacija poslata');
-          this.currentStatus = 'pending'; // Odmah osvežavamo status na ekranu
+          alert('Rezervacija uspešno poslata');
           this.reservationDate = '';
           this.guestsCount = 0;
+          this.checkCurrentReservation(); // Osvežavamo ekran
         },
         error: (err) => {
           console.error('Greška pri slanju:', err);
-          alert('Greška');
+          alert('Greška prilikom kreiranja rezervacije.');
         }
       });
   }

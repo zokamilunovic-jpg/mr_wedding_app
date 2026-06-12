@@ -1,43 +1,43 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
 
-  // ⚠️ OVO ZAMENI SA SVOJIM FIREBASE URL-OM
   private dbUrl =
     'https://wedding-app-98beb-default-rtdb.europe-west1.firebasedatabase.app/';
 
   constructor(private http: HttpClient) {}
 
-  // ➕ KREIRANJE REZERVACIJE
-  createReservation(reservation: any) {
+  // 1. Kreiranje rezervacije za specifičnog korisnika
+  createReservation(reservation: any, userId: string) {
     return this.http.post(
-      `${this.dbUrl}/reservations.json`,
+      `${this.dbUrl}/reservations/${userId}.json`,
       reservation
     );
   }
 
-  // 📥 UČITAVANJE SVIH REZERVACIJA
-  getReservations() {
+  // 2. Uzimanje rezervacija SAMO za tog korisnika
+  getReservations(userId: string): Observable<any> {
     return this.http.get(
-      `${this.dbUrl}/reservations.json`
+      `${this.dbUrl}/reservations/${userId}.json`
     );
   }
 
-  // ❌ BRISANJE REZERVACIJE
-  deleteReservation(id: string) {
+  // 3. Brisanje tačne rezervacije unutar korisnikovog čvora
+  deleteReservation(id: string, userId: string) {
     return this.http.delete(
-      `${this.dbUrl}/reservations/${id}.json`
+      `${this.dbUrl}/reservations/${userId}/${id}.json`
     );
   }
 
-  // ✏️ UPDATE STATUSA (approve/reject)
-  updateReservation(id: string, data: any) {
+  // 4. Izmena tačne rezervacije unutar korisnikovog čvora
+  updateReservation(id: string, data: any, userId: string) {
     return this.http.patch(
-      `${this.dbUrl}/reservations/${id}.json`,
+      `${this.dbUrl}/reservations/${userId}/${id}.json`,
       data
     );
   }
