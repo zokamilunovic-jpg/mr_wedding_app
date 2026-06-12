@@ -13,7 +13,7 @@ export class ReservationService {
   constructor(private http: HttpClient) {}
 
   // 1. Kreiranje rezervacije za specifičnog korisnika
-  createReservation(reservation: any, userId: string) {
+  createReservation(reservation: any, userId: string): Observable<any> {
     return this.http.post(
       `${this.dbUrl}/reservations/${userId}.json`,
       reservation
@@ -28,29 +28,29 @@ export class ReservationService {
   }
 
   // 3. Brisanje tačne rezervacije unutar korisnikovog čvora
-  deleteReservation(id: string, userId: string) {
+  deleteReservation(id: string, userId: string): Observable<any> {
     return this.http.delete(
       `${this.dbUrl}/reservations/${userId}/${id}.json`
     );
   }
 
   // 4. Izmena tačne rezervacije unutar korisnikovog čvora
-  updateReservation(id: string, data: any, userId: string) {
+  updateReservation(id: string, data: any, userId: string): Observable<any> {
     return this.http.patch(
       `${this.dbUrl}/reservations/${userId}/${id}.json`,
       data
     );
   }
 
+  // 5. Dohvatanje dodatnih usluga iz baze
   getServices(): Observable<any> {
-  return this.http.get(
-    `${this.dbUrl}/services.json`
-  );
-}
+    return this.http.get(
+      `${this.dbUrl}/services.json`
+    );
+  }
 
-
-// Povlači celo stablo rezervacija (za sve korisnike)
-getAllReservations() {
-  return this.http.get(`${this.dbUrl}/reservations.json`);
-}
+  // 6. Povlači celo stablo rezervacija (za sve korisnike) - koristi je i Admin i Kalendar za provera zauzetosti
+  getAllReservations(): Observable<any> {
+    return this.http.get<any>(`${this.dbUrl}/reservations.json`);
+  }
 }
