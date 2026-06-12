@@ -23,20 +23,39 @@ export class AdminPage {
       next: (data: any) => {
         const flattenedRequests: any[] = [];
 
+        // Ako je baza potpuno prazna, resetujemo niz i prekidamo izvršavanje
+        if (!data) {
+          this.allRequests = [];
+          return;
+        }
+
         // 1. Prolazimo kroz sve korisnike (prvi nivo Firebase objekta)
         for (const userId in data) {
           if (data.hasOwnProperty(userId)) {
             
-            // 2. Prolazimo kroz sve rezervacije tog specifičnog korisnika (drugi nivo)
-            for (const resId in data[userId]) {
-              if (data[userId].hasOwnProperty(resId)) {
-                
-                flattenedRequests.push({
-                  id: resId,             // Firebase ID rezervacije (npr. -OurHbkNW...)
-                  userId: userId,         // ID korisnika kojem rezervacija pripada
-                  ...data[userId][resId]  // date, guestsCount, price, status...
-                });
+            const userReservations = data[userId];
+            
+            // Provera da li korisnik uopšte ima objekat sa rezervacijama (da preskočimo prazne čvorove)
+            if (userReservations && typeof userReservations === 'object') {
+              
+              // 2. Prolazimo kroz sve rezervacije tog specifičnog korisnika (drugi nivo)
+              for (const resId in userReservations) {
+                if (userReservations.hasOwnProperty(resId)) {
+                  
+                  const reservation = userReservations[resId];
 
+                  // KLJUČNA IZMENA: Ubacujemo u listu SAMO ako rezervacija ima definisan datum
+                  // (Proveri da li ti se u bazi polje zove 'date' ili 'datum' i prilagodi ako treba)
+                  if (reservation && (reservation.date || reservation.datum)) {
+                    
+                    flattenedRequests.push({
+                      id: resId,                             // Firebase ID rezervacije (npr. -OurHbkNW...)
+                      userId: userId,                        // ID korisnika kojem rezervacija pripada
+                      ...reservation                         // date, guestsCount, price, status...
+                    });
+
+                  }
+                }
               }
             }
 
