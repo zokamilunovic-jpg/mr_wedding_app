@@ -20,6 +20,7 @@
           <ion-label>
             <h2>{{ r.date }}</h2>
             <p>Broj gostiju: <strong>{{ r.guestsCount }}</strong></p>
+            <p>Ukupna cena: <strong style="color: #e91e63;">{{ r.price || 0 }} EUR</strong></p>
           </ion-label>
           
           <ion-badge slot="end" 
