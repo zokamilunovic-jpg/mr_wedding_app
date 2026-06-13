@@ -21,6 +21,15 @@
         Reservation
       </ion-item>
 
+      <ion-item
+        *ngIf="isAdmin"
+        button
+        routerLink="/admin">
+
+        Admin Panel
+
+      </ion-item>
+
     </ion-list>
   </ion-content>
 

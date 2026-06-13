@@ -12,7 +12,6 @@ export class AdminGuard implements CanActivate {
 
     const userString = localStorage.getItem('user');
 
-    // 1. ako nema user-a → login
     if (!userString) {
       this.router.navigate(['/login']);
       return false;
@@ -20,12 +19,10 @@ export class AdminGuard implements CanActivate {
 
     const user = JSON.parse(userString);
 
-    // 2. ako je admin → dozvoli ulaz
     if (user.role === 'admin') {
       return true;
     }
 
-    // 3. ako nije admin → home
     this.router.navigate(['/home']);
     return false;
   }

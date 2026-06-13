@@ -9,16 +9,34 @@ import { Router, NavigationEnd } from '@angular/router';
   standalone: false,
 })
 export class AppComponent {
- constructor(
+
+  isAdmin = false;
+
+  constructor(
     private menuCtrl: MenuController,
     private router: Router
   ) {
 
-   
+    this.ucitajUlogu();
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.menuCtrl.close();
+
+    
+        this.ucitajUlogu();
       }
     });
-}
+  }
+
+  ucitajUlogu() {
+    const userString = localStorage.getItem('user');
+
+    if (userString) {
+      const user = JSON.parse(userString);
+      this.isAdmin = user.role === 'admin';
+    } else {
+      this.isAdmin = false;
+    }
+  }
 }
