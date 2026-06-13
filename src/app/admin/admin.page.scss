@@ -1,0 +1,161 @@
+// Pozadinski gradijent celog ekrana preuzet sa home stranice
+.admin-content {
+  --background: linear-gradient(135deg, #ffd6e7, #fff0f6);
+}
+
+// Centriranje i maksimalna širina kontejnera kako kartice ne bi bile preširoke na desktopu
+.admin-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100%;
+  width: 100%;
+}
+
+.admin-inner {
+  width: 100%;
+  max-width: 500px; // Malo šire od login forme da podaci o rezervaciji imaju prostora
+  padding-bottom: 20px;
+}
+
+// Stilovi za zaglavlje i naslove
+.header-section {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.title {
+  font-size: 24px;
+  color: #d63384; // Prelepa tamnoroze iz tvog CSS-a
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #8a8a8a;
+  margin: 0;
+}
+
+// Prilagođene kartice sa staklenim efektom (Blurovana bela pozadina sa roze senkom)
+.custom-card {
+  margin-bottom: 16px;
+  margin-inline: 0px;
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(255, 105, 180, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.card-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 105, 180, 0.1);
+  padding: 14px 16px;
+}
+
+.card-title-text {
+  font-size: 17px;
+  font-weight: 700;
+  color: #333;
+}
+
+// Redovi sa informacijama unutar kartice
+.info-row {
+  font-size: 15px;
+  margin: 8px 0;
+  color: #444;
+  display: flex;
+  align-items: center;
+
+  ion-icon {
+    font-size: 18px;
+    margin-right: 10px;
+    color: #d63384; // Ikone menjamo u roze brend boju
+  }
+}
+
+.price-text {
+  color: #d63384; // Cena usklađena sa primarnom roze
+  font-size: 16px;
+}
+
+// Sekcija sa dodatnim uslugama
+.services-section {
+  margin-top: 12px;
+  border-top: 1px dashed rgba(255, 105, 180, 0.2);
+  padding-top: 10px;
+}
+
+.services-label {
+  font-size: 13px;
+  color: #777;
+}
+
+.chips-container {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  ion-chip {
+    height: 26px;
+    margin: 0;
+    --background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 105, 180, 0.3);
+    
+    ion-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #d63384; // Tekst unutar čipova prebacujemo u roze
+    }
+  }
+}
+
+// Kontejner za dugmad i dugmad
+.buttons-container {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.action-btn {
+  flex: 1;
+  font-weight: bold;
+  margin: 0;
+  --border-radius: 12px; // Zaobljene ivice u skladu sa .login-btn
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+// Prazan ekran ako nema rezervacija
+.empty-state {
+  text-align: center;
+  padding: 50px 20px;
+  color: #8a8a8a;
+
+  ion-icon {
+    font-size: 64px;
+    color: #ff85c1;
+    margin-bottom: 10px;
+  }
+}
+
+// Toolbar stilovi usklađeni sa tvojim globalnim/home headerom
+ion-header ion-toolbar {
+  --background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 105, 180, 0.1);
+}
+
+ion-title {
+  color: #d63384;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+ion-menu-button {
+  color: #d63384;
+}
