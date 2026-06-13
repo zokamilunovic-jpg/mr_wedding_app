@@ -58,7 +58,6 @@ export class HomePage implements OnInit {
     });
   }
 
-  // Korak 1: Izmena datuma i broja gostiju
   async openUpdateModal(reservation: any) {
     if (this.allServices.length === 0) {
       this.loadAvailableServices();
@@ -95,7 +94,6 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  // Korak 2: Izmena dodatnih usluga, računanje cene i reset statusa
   async openServicesModal(reservation: any, newDate: string, newGuests: number) {
     const userId = localStorage.getItem('userId');
     if (!userId) return;
@@ -118,7 +116,6 @@ export class HomePage implements OnInit {
           text: 'Sačuvaj',
           handler: (selectedServiceIds: string[]) => {
             
-            // Logika za računanje cene
             const basePrice = (newGuests || 0) * 40;
             let servicesSum = 0;
 
@@ -133,19 +130,18 @@ export class HomePage implements OnInit {
 
             const calculatedTotalPrice = basePrice + servicesSum;
 
-            // Priprema podataka za Firebase
             const updatedData = {
               date: newDate,
               guestsCount: newGuests,
               serviceIds: selectedServiceIds || [],
               price: calculatedTotalPrice,
-              status: 'pending' // <--- OVO PONOVO VRAĆA REZERVACIJU "NA ČEKANJE" ZA ADMINA!
+              status: 'pending' 
             };
 
             this.reservationService.updateReservation(reservation.id, updatedData, userId).subscribe({
               next: () => {
                 this.prikaziToast('Izmene su poslate adminu na ponovno odobrenje!');
-                this.loadReservations(); // Osvežavamo tabelu
+                this.loadReservations(); 
               },
               error: (err) => console.error('Greška pri čuvanju:', err)
             });
@@ -164,5 +160,21 @@ export class HomePage implements OnInit {
       color: 'danger' 
     });
     toast.present();
+  }
+
+  deleteRes(reservationId: string) {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+
+    
+    if (confirm('Da li sigurno želiš da obrišeš ovu rezervaciju?')) {
+      this.reservationService.deleteReservation(reservationId, userId).subscribe({
+        next: () => {
+          this.prikaziToast('Rezervacija je uspešno obrisana.');
+          this.loadReservations(); 
+        },
+        error: (err) => console.error('Greška pri brisanju:', err)
+      });
+    }
   }
 }
