@@ -1,11 +1,18 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header class="hero-header">
+  <ion-toolbar class="transparent-toolbar">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
     <ion-title>Profil</ion-title>
   </ion-toolbar>
+
+  <div class="hero-overlay">
+    <div class="hero-text">
+      <h1>{{ user?.ime }} {{ user?.prezime }}</h1>
+      <p>Planirajte svoj savršen dan 💍</p>
+    </div>
+  </div>
 </ion-header>
 
 <ion-content class="profile-content">

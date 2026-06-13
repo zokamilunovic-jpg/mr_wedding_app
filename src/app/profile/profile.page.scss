@@ -1,24 +1,67 @@
 .profile-content {
-  --background: linear-gradient(135deg, #ffd6e7, #fff0f6);
+  --background: linear-gradient(135deg, #ffd6e7, #ffe3f1);
+}
+
+.hero-header {
+  position: relative;
+  height: 220px;
+  background: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+  overflow: hidden;
+}
+
+.hero-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(214, 51, 132, 0.35); 
+  backdrop-filter: blur(6px);
+}
+
+.transparent-toolbar {
+  --background: transparent;
+  --color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 2;
+  color: white;
+}
+
+.hero-text h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.hero-text p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  opacity: 0.9;
 }
 
 .profile-wrapper {
-  height: 100%;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  position: relative;
+  z-index: 2;
 }
 
 .profile-card {
   width: 100%;
   max-width: 380px;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  padding: 30px 20px;
+  padding: 25px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+  box-shadow: 0 10px 30px rgba(214, 51, 132, 0.15);
 }
 
 .avatar ion-icon {
@@ -33,27 +76,26 @@
 }
 
 .profile-card p {
-  color: #8a8a8a;
+  color: #b04578;
   margin-bottom: 20px;
 }
 
 .logout-btn {
-  --background: rgba(255, 255, 255, 0.85);
-  --color: #d63384;
+  --background: #d63384;
+  --color: #ffffff;
   --border-radius: 14px;
   font-weight: 600;
 
-  --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(10px);
+  --box-shadow: 0 8px 25px rgba(214, 51, 132, 0.25);
 
+  margin-top: 15px;
   transition: all 0.25s ease;
-  margin-top: 20px;
 }
 
 .logout-btn:hover {
-  --background: #ffffff;
+  --background: #c2186a;
   transform: translateY(-2px);
-  --box-shadow: 0 12px 30px rgba(214, 51, 132, 0.15);
+  --box-shadow: 0 12px 30px rgba(214, 51, 132, 0.35);
 }
 
 .logout-btn:active {

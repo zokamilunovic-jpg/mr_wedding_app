@@ -29,12 +29,12 @@ export class LoginPage {
           next: (user: any) => {
             console.log('USER:', user);
 
-            // čuvanje user-a
+           
             localStorage.setItem('user', JSON.stringify(user));
 
-            alert('Dobrodošli!');
+           // alert('Dobrodošli!');
 
-            // ROLE LOGIKA
+            
             if (user.role === 'admin') {
               this.router.navigate(['/admin']);
             } else {
