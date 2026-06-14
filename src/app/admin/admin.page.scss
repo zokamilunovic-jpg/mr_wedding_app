@@ -1,9 +1,7 @@
-// Pozadinski gradijent celog ekrana preuzet sa home stranice
 .admin-content {
   --background: linear-gradient(135deg, #ffd6e7, #fff0f6);
 }
 
-// Centriranje i maksimalna širina kontejnera kako kartice ne bi bile preširoke na desktopu
 .admin-wrapper {
   display: flex;
   justify-content: center;
@@ -14,11 +12,10 @@
 
 .admin-inner {
   width: 100%;
-  max-width: 500px; // Malo šire od login forme da podaci o rezervaciji imaju prostora
+  max-width: 500px; 
   padding-bottom: 20px;
 }
 
-// Stilovi za zaglavlje i naslove
 .header-section {
   text-align: center;
   margin-bottom: 20px;
@@ -27,7 +24,7 @@
 
 .title {
   font-size: 24px;
-  color: #d63384; // Prelepa tamnoroze iz tvog CSS-a
+  color: #d63384; 
   font-weight: 700;
   margin-bottom: 5px;
 }
@@ -38,7 +35,6 @@
   margin: 0;
 }
 
-// Prilagođene kartice sa staklenim efektom (Blurovana bela pozadina sa roze senkom)
 .custom-card {
   margin-bottom: 16px;
   margin-inline: 0px;
@@ -63,7 +59,6 @@
   color: #333;
 }
 
-// Redovi sa informacijama unutar kartice
 .info-row {
   font-size: 15px;
   margin: 8px 0;
@@ -74,16 +69,15 @@
   ion-icon {
     font-size: 18px;
     margin-right: 10px;
-    color: #d63384; // Ikone menjamo u roze brend boju
+    color: #d63384; 
   }
 }
 
 .price-text {
-  color: #d63384; // Cena usklađena sa primarnom roze
+  color: #d63384; 
   font-size: 16px;
 }
 
-// Sekcija sa dodatnim uslugama
 .services-section {
   margin-top: 12px;
   border-top: 1px dashed rgba(255, 105, 180, 0.2);
@@ -110,12 +104,11 @@
     ion-label {
       font-size: 12px;
       font-weight: 600;
-      color: #d63384; // Tekst unutar čipova prebacujemo u roze
+      color: #d63384; 
     }
   }
 }
 
-// Kontejner za dugmad i dugmad
 .buttons-container {
   display: flex;
   gap: 12px;
@@ -126,11 +119,10 @@
   flex: 1;
   font-weight: bold;
   margin: 0;
-  --border-radius: 12px; // Zaobljene ivice u skladu sa .login-btn
+  --border-radius: 12px; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-// Prazan ekran ako nema rezervacija
 .empty-state {
   text-align: center;
   padding: 50px 20px;
@@ -143,7 +135,6 @@
   }
 }
 
-// Toolbar stilovi usklađeni sa tvojim globalnim/home headerom
 ion-header ion-toolbar {
   --background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
