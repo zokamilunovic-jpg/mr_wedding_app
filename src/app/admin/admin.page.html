@@ -16,7 +16,7 @@
 
   <div class="admin-wrapper">
     <div class="admin-inner">
-      
+
       <div class="header-section">
         <h2 class="title">Upravljanje rezervacijama</h2>
         <p class="subtitle">Pregled i obrada svih pristiglih zahteva za venčanja</p>
@@ -34,18 +34,29 @@
               Datum: {{ req.date || req.datum }}
             </ion-card-title>
           </div>
-          
-          <ion-badge [color]="req.status === 'pending' ? 'warning' : (req.status === 'approved' ? 'success' : 'danger')">
+
+          <ion-badge
+            [color]="req.status === 'pending' ? 'warning' : (req.status === 'approved' ? 'success' : 'danger')">
             {{ req.status === 'pending' ? 'NA ČEKANJU' : (req.status === 'approved' ? 'ODOBRENO' : 'ODBIJENO') }}
           </ion-badge>
         </ion-card-header>
+
+        <p class="info-row">
+          <ion-icon name="person-outline"></ion-icon>
+          <strong>{{ req.ime }} {{ req.prezime }}</strong>
+        </p>
+
+        <p class="info-row">
+          <ion-icon name="mail-outline"></ion-icon>
+          {{ req.email }}
+        </p>
 
         <ion-card-content style="padding: 16px;">
           <p class="info-row">
             <ion-icon name="people-outline"></ion-icon>
             Broj gostiju: &nbsp;<strong>{{ req.guestsCount || 0 }}</strong>
           </p>
-          
+
           <p class="info-row">
             <ion-icon name="cash-outline"></ion-icon>
             Ukupna cena: &nbsp;<strong class="price-text">{{ req.price || 0 }} EUR</strong>
@@ -61,19 +72,13 @@
           </div>
 
           <div *ngIf="req.status === 'pending'" class="buttons-container">
-            <ion-button 
-              expand="block" 
-              color="success" 
-              class="action-btn"
+            <ion-button expand="block" color="success" class="action-btn"
               (click)="updateStatus(req.id, req.userId, 'approved')">
               <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
               Prihvati
             </ion-button>
-            
-            <ion-button 
-              expand="block" 
-              color="danger" 
-              class="action-btn"
+
+            <ion-button expand="block" color="danger" class="action-btn"
               (click)="updateStatus(req.id, req.userId, 'rejected')">
               <ion-icon name="close-circle-outline" slot="start"></ion-icon>
               Odbij

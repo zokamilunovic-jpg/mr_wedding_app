@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ReservationService } from '../services/reservation';
 import { AlertController } from '@ionic/angular';
-import { map } from 'rxjs/operators';
+//import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-reservation',

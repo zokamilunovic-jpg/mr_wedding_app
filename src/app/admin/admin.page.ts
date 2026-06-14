@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ReservationService } from '../services/reservation';
+import { AuthService } from '../services/auth';
 
 @Component({
   selector: 'app-admin',
@@ -11,9 +12,9 @@ export class AdminPage {
 
   allRequests: any[] = [];
 
-  constructor(private reservationService: ReservationService) { }
+  constructor(private reservationService: ReservationService,
+    private authService: AuthService) { }
 
-  // Koristimo Ionic životni ciklus umesto ngOnInit kako bi se podaci osvežili pri svakom ulasku na ekran
   ionViewWillEnter() {
     this.loadAllRequests();
   }
@@ -23,35 +24,42 @@ export class AdminPage {
       next: (data: any) => {
         const flattenedRequests: any[] = [];
 
-        // Ako je baza potpuno prazna, resetujemo niz i prekidamo izvršavanje
+
         if (!data) {
           this.allRequests = [];
           return;
         }
 
-        // 1. Prolazimo kroz sve korisnike (prvi nivo Firebase objekta)
+
         for (const userId in data) {
           if (data.hasOwnProperty(userId)) {
-            
+
             const userReservations = data[userId];
-            
-            // Provera da li korisnik uopšte ima objekat sa rezervacijama (da preskočimo prazne čvorove)
+
             if (userReservations && typeof userReservations === 'object') {
-              
-              // 2. Prolazimo kroz sve rezervacije tog specifičnog korisnika (drugi nivo)
+
               for (const resId in userReservations) {
                 if (userReservations.hasOwnProperty(resId)) {
-                  
+
                   const reservation = userReservations[resId];
 
-                  // KLJUČNA IZMENA: Ubacujemo u listu SAMO ako rezervacija ima definisan datum
-                  // (Proveri da li ti se u bazi polje zove 'date' ili 'datum' i prilagodi ako treba)
+
                   if (reservation && (reservation.date || reservation.datum)) {
-                    
+
                     flattenedRequests.push({
-                      id: resId,                             // Firebase ID rezervacije (npr. -OurHbkNW...)
-                      userId: userId,                        // ID korisnika kojem rezervacija pripada
-                      ...reservation                         // date, guestsCount, price, status...
+                      id: resId,
+                      userId: userId,
+                      ...reservation
+                    });
+
+                    this.authService.getUser(userId).subscribe(user => {
+                      const request = flattenedRequests.find(r => r.id === resId);
+
+                      if (request) {
+                        request.ime = (user as any).ime;
+                        request.prezime = (user as any).prezime;
+                        request.email = (user as any).email;
+                      }
                     });
 
                   }
@@ -62,7 +70,6 @@ export class AdminPage {
           }
         }
 
-        // 3. Sortiramo listu tako da svi novi zahtevi (koji su 'pending') budu na samom vrhu
         this.allRequests = flattenedRequests.sort((a, b) => {
           if (a.status === 'pending' && b.status !== 'pending') return -1;
           if (a.status !== 'pending' && b.status === 'pending') return 1;
@@ -75,15 +82,15 @@ export class AdminPage {
     });
   }
 
-  // Funkcija koja menja status u Firebase bazi na osnovu kliknutog dugmeta (Prihvati / Odbij)
+
   updateStatus(reservationId: string, userId: string, newStatus: string) {
     const updateData = { status: newStatus };
 
-    // Šaljemo izmenu kroz servis (servis koristi PATCH metodu)
+
     this.reservationService.updateReservation(reservationId, updateData, userId).subscribe({
       next: () => {
         alert(`Rezervacija je uspešno ${newStatus === 'approved' ? 'odobrena' : 'odbijena'}.`);
-        this.loadAllRequests(); // Ponovo punimo listu kako bi se promena odmah videla na ekranu
+        this.loadAllRequests();
       },
       error: (err) => {
         console.error('Greška pri ažuriranju statusa:', err);

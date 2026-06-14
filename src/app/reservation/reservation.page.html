@@ -23,7 +23,8 @@
 
       <ion-item lines="none" class="input-item" (click)="openCalendarModal(true)">
         <ion-label position="stacked" style="color: #d63384; font-weight: 600;">Datum svadbe</ion-label>
-        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding-top: 8px; padding-bottom: 4px;">
+        <div
+          style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding-top: 8px; padding-bottom: 4px;">
           <span style="color: #333; font-size: 16px;">
             {{ reservationDate ? (reservationDate | date: 'dd/MM/yyyy') : 'Izaberite datum...' }}
           </span>
@@ -33,11 +34,7 @@
 
       <ion-item lines="none" class="input-item">
         <ion-label position="floating">Broj gostiju</ion-label>
-        <ion-input 
-          type="number" 
-          [(ngModel)]="guestsCount"
-            min="1"
-          (ionInput)="onGuestsCountChange()">
+        <ion-input type="number" [(ngModel)]="guestsCount" min="1" (ionInput)="onGuestsCountChange()">
         </ion-input>
       </ion-item>
 
@@ -45,23 +42,22 @@
         <ion-button fill="outline" color="secondary" (click)="openServicesModal()">
           Izaberite usluge ▲
         </ion-button>
-        <p *ngIf="selectedServices && selectedServices.length > 0" style="font-size: 13px; color: #666; margin: 5px 0 0 0;">
+        <p *ngIf="selectedServices && selectedServices.length > 0"
+          style="font-size: 13px; color: #666; margin: 5px 0 0 0;">
           Odabrano usluga: {{ selectedServices.join(', ') }}
         </p>
       </div>
 
-      <div class="price-container" style="text-align: center; margin: 15px 0; padding: 10px; background: #fff5f8; border-radius: 8px;">
+      <div class="price-container"
+        style="text-align: center; margin: 15px 0; padding: 10px; background: #fff5f8; border-radius: 8px;">
         <span style="font-size: 16px; color: #555;">Ukupna cena:</span>
         <h2 style="margin: 5px 0; color: #e91e63; font-weight: bold;">{{ totalPrice }} EUR</h2>
       </div>
 
-<ion-button
-  expand="block"
-  class="login-btn"
-  (click)="sendReservation()"
-  [disabled]="!reservationDate || guestsCount <=0">
-  Pošalji rezervaciju
-</ion-button>
+      <ion-button expand="block" class="login-btn" (click)="sendReservation()"
+        [disabled]="!reservationDate || guestsCount <=0">
+        Pošalji rezervaciju
+      </ion-button>
 
     </div>
   </div>
@@ -79,20 +75,15 @@
 
       <ion-content class="ion-padding" style="--background: #fff0f6;">
         <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-          
-          <ion-datetime
-            presentation="date"
-            size="cover"
-            [(ngModel)]="temporaryDate"
-            [isDateEnabled]="isDateAllowed"
-            [min]="minDate"
-            prefer-wheel="false"
+
+          <ion-datetime presentation="date" size="cover" [(ngModel)]="temporaryDate" [isDateEnabled]="isDateAllowed"
+            [min]="minDate" prefer-wheel="false"
             style="border-radius: 16px; box-shadow: 0 10px 25px rgba(255, 105, 180, 0.15); --background: #ffffff;">
           </ion-datetime>
 
         </div>
       </ion-content>
-      
+
       <ion-footer>
         <ion-toolbar style="padding: 8px 16px;">
           <ion-button expand="block" class="login-btn" style="margin: 0;" (click)="confirmDate()">
