@@ -36,6 +36,7 @@
         <ion-input 
           type="number" 
           [(ngModel)]="guestsCount"
+            min="1"
           (ionInput)="onGuestsCountChange()">
         </ion-input>
       </ion-item>
@@ -54,13 +55,13 @@
         <h2 style="margin: 5px 0; color: #e91e63; font-weight: bold;">{{ totalPrice }} EUR</h2>
       </div>
 
-      <ion-button
-        expand="block"
-        class="login-btn"
-        [disabled]="!reservationDate"
-        (click)="sendReservation()">
-        Pošalji rezervaciju
-      </ion-button>
+<ion-button
+  expand="block"
+  class="login-btn"
+  (click)="sendReservation()"
+  [disabled]="!reservationDate || guestsCount <=0">
+  Pošalji rezervaciju
+</ion-button>
 
     </div>
   </div>
