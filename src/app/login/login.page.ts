@@ -57,7 +57,7 @@ export class LoginPage {
     alert('Molimo popunite oba polja.');
   }
 }
-
+/*
   registrujSe() {
     if (this.email && this.password) {
       this.authService.registracija(this.email, this.password).subscribe({
@@ -73,5 +73,5 @@ export class LoginPage {
     } else {
       alert('Unesite email i lozinku za registraciju.');
     }
-  }
+  } */
 }
