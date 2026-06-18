@@ -14,9 +14,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
- 
+  
   registracija(email: string, lozinka: string): Observable<any> {
-   
     const url = `${this.authUrl}signUp?key=${environment.firebaseApiKey}`;
     
     const teloZahteva = {
@@ -28,19 +27,16 @@ export class AuthService {
     return this.http.post(url, teloZahteva);
   }
 
-
+  
   sacuvajKorisnika(uid: string, korisnik: any) {
-  return this.http.put(
-    `${environment.databaseUrl}/users/${uid}.json`,
-    korisnik
-  );
-}
-
-
+    return this.http.put(
+      `${environment.databaseUrl}/users/${uid}.json?auth=${this.getToken()}`,
+      korisnik
+    );
+  }
 
  
   login(email: string, lozinka: string): Observable<any> {
-   
     const url = `${this.authUrl}signInWithPassword?key=${environment.firebaseApiKey}`;
     
     const teloZahteva = {
@@ -57,13 +53,18 @@ export class AuthService {
     );
   }
 
-  getUser(uid: string) {
-  return this.http.get(
-    `${environment.databaseUrl}/users/${uid}.json`
-  );
-}  
-
   
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+ 
+  getUser(uid: string) {
+    return this.http.get(
+      `${environment.databaseUrl}/users/${uid}.json?auth=${this.getToken()}`
+    );
+  }
+
   logout() {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
